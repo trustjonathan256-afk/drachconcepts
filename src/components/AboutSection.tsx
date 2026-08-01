@@ -684,11 +684,10 @@ export default function AboutSection() {
                     whileHover={{ x: 6 }}
                     whileTap={{ scale: 0.985 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
-                    className={`group p-6 md:p-8 cursor-pointer transition-all duration-300 border select-none ${
-                      isActive
+                    className={`group p-6 md:p-8 cursor-pointer transition-all duration-300 border select-none ${isActive
                         ? "bg-white border-black shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
                         : "bg-black/[0.02] border-black/10 hover:bg-white hover:border-black/30 hover:shadow-lg"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
@@ -696,11 +695,10 @@ export default function AboutSection() {
                           {pillar.id}
                         </span>
                         <div
-                          className={`w-10 h-10 rounded-none flex items-center justify-center border transition-all duration-300 ${
-                            isActive
+                          className={`w-10 h-10 rounded-none flex items-center justify-center border transition-all duration-300 ${isActive
                               ? "bg-black border-black text-white shadow-md"
                               : "bg-white border-black/15 text-black group-hover:bg-black group-hover:text-white group-hover:border-black"
-                          }`}
+                            }`}
                         >
                           <IconComponent
                             className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12"
@@ -713,18 +711,16 @@ export default function AboutSection() {
                       </div>
 
                       <div
-                        className={`w-8 h-8 rounded-none flex items-center justify-center border transition-all duration-300 ${
-                          isActive
+                        className={`w-8 h-8 rounded-none flex items-center justify-center border transition-all duration-300 ${isActive
                             ? "bg-black border-black text-white"
                             : "border-black/20 text-black/40 group-hover:bg-black group-hover:text-white group-hover:border-black"
-                        }`}
+                          }`}
                       >
                         <ArrowUpRight
-                          className={`w-4 h-4 transition-transform duration-300 ${
-                            isActive
+                          className={`w-4 h-4 transition-transform duration-300 ${isActive
                               ? "rotate-45"
                               : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                          }`}
+                            }`}
                         />
                       </div>
                     </div>

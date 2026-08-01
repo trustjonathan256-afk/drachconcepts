@@ -77,11 +77,10 @@ export default function HeroSection() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
             ? "bg-white/95 backdrop-blur-lg border-b border-black/15 shadow-[0_10px_30px_rgba(0,0,0,0.08)] py-3"
             : "bg-white/70 backdrop-blur-sm border-b border-black/5 py-5"
-        }`}
+          }`}
       >
         <div className="flex items-center justify-between px-6 md:px-12 lg:px-16 max-w-[100rem] mx-auto">
           {/* Logo with smooth dynamic scaling */}
