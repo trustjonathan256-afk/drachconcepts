@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Drach Concepts",
+  title: "Drach Concepts | Creative Media Studio",
 
   description:
     "Drach Concepts is a premium creative media studio specializing in music production, photography, videography, drone coverage, event coverage, branding, graphic design, and social media content.",
@@ -51,7 +52,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+  {children}
+  <Analytics />
+  <SpeedInsights />
+</body>
     </html>
   );
 }
