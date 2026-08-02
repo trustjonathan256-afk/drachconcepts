@@ -16,7 +16,7 @@ import {
   Menu,
 } from "lucide-react";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import NetBackground from "./NetBackground";
 
 // Reusable animated container for the layout
@@ -37,7 +37,132 @@ const itemVariants: Variants = {
   },
 };
 
+// ─── Hero Image with 3-D Tilt, Hover Glow & Click Ripple ────────────────────
+function HeroImage({ yHeroImage }: { yHeroImage: ReturnType<typeof useTransform> }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Tilt state
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+  // Spotlight cursor position (0–100% inside frame)
+  const [spot, setSpot] = useState({ x: 50, y: 50, visible: false });
+  // Click ripple
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
+  const rippleId = useRef(0);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const { left, top, width, height } = el.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+    // Tilt: max ±12 degrees
+    const ry = ((x / width) - 0.5) * 24;
+    const rx = -((y / height) - 0.5) * 16;
+    setTilt({ rx, ry });
+    setSpot({ x: (x / width) * 100, y: (y / height) * 100, visible: true });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setTilt({ rx: 0, ry: 0 });
+    setSpot((s) => ({ ...s, visible: false }));
+  }, []);
+
+  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const { left, top, width, height } = el.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    const id = ++rippleId.current;
+    setRipples((r) => [...r, { id, x, y }]);
+    // Remove after animation completes (700ms)
+    setTimeout(() => setRipples((r) => r.filter((rp) => rp.id !== id)), 700);
+  }, []);
+
+  return (
+    <div
+      className="w-full lg:w-[45%] relative mt-16 lg:mt-0 lg:absolute lg:right-0 lg:top-[15%] h-[31.25rem] lg:h-[43.75rem] z-10"
+      style={{ perspective: "1200px" }}
+    >
+      <motion.div
+        ref={containerRef}
+        style={{
+          y: yHeroImage,
+          rotateX: tilt.rx,
+          rotateY: tilt.ry,
+          transformStyle: "preserve-3d",
+        }}
+        animate={{ rotateX: tilt.rx, rotateY: tilt.ry }}
+        transition={{ type: "spring", stiffness: 180, damping: 22 }}
+        initial={{ opacity: 0, x: 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.025 }}
+        whileTap={{ scale: 0.975 }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+        className="relative w-full h-full lg:w-[90%] lg:h-[105%] ml-auto bg-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-black/10 overflow-hidden cursor-pointer select-none"
+      >
+        {/* Main Image */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{ filter: spot.visible ? "brightness(1.08) contrast(1.04)" : "brightness(1) contrast(1)" }}
+          transition={{ duration: 0.3 }}
+        >
+          <Image
+            src="/images/hero-camera.jpg"
+            alt="Drach Concepts — Cinematic Photography"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </motion.div>
+
+        {/* Cursor Spotlight Overlay */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          animate={{ opacity: spot.visible ? 1 : 0 }}
+          transition={{ duration: 0.25 }}
+          style={{
+            background: `radial-gradient(circle 220px at ${spot.x}% ${spot.y}%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 45%, transparent 75%)`,
+          }}
+        />
+
+        {/* Hover Edge Glow (rim light) */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none border-2 border-white/0 transition-all duration-300"
+          animate={{ borderColor: spot.visible ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0)" }}
+          transition={{ duration: 0.3 }}
+        />
+
+        {/* Click Ripples */}
+        {ripples.map((rp) => (
+          <motion.span
+            key={rp.id}
+            className="absolute pointer-events-none rounded-full bg-white/30"
+            style={{ left: `${rp.x}%`, top: `${rp.y}%`, translateX: "-50%", translateY: "-50%" }}
+            initial={{ width: 0, height: 0, opacity: 0.7 }}
+            animate={{ width: "200%", height: "200%", opacity: 0 }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+          />
+        ))}
+
+        {/* Bottom label badge */}
+        <motion.div
+          className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-[0.6875rem] font-semibold tracking-[0.18em] uppercase px-3 py-1.5 pointer-events-none"
+          animate={{ opacity: spot.visible ? 1 : 0.7, y: spot.visible ? 0 : 4 }}
+          transition={{ duration: 0.25 }}
+        >
+          Drach Concepts · 4K Cinematic
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function HeroSection() {
+
   const [isScrolled, setIsScrolled] = useState(false);
   const trustRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
@@ -323,24 +448,8 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column with High-Impact Parallax Scroll Offset */}
-          <div className="w-full lg:w-[45%] relative mt-16 lg:mt-0 lg:absolute lg:right-0 lg:top-[15%] h-[31.25rem] lg:h-[43.75rem] z-10">
-            <motion.div
-              style={{ y: yHeroImage }}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full h-full lg:w-[90%] lg:h-[105%] ml-auto bg-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-black/10"
-            >
-              <Image
-                src="/images/hero-camera.jpg"
-                alt="Drach Concepts — Cinematic Photography"
-                fill
-                className="object-cover object-center"
-                priority
-              />
-            </motion.div>
-          </div>
+          {/* Right Column — Interactive Parallax Hero Image */}
+          <HeroImage yHeroImage={yHeroImage} />
         </main>
       </div>
 

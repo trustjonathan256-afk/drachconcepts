@@ -5,6 +5,7 @@ import FeaturedWorkSection from "@/components/FeaturedWorkSection";
 import ExpertiseSection from "@/components/ExpertiseSection";
 import ProcessSection from "@/components/ProcessSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import CtaFooterSection from "@/components/CtaFooterSection";
 
 export default function Home() {
   return (
@@ -16,9 +17,11 @@ export default function Home() {
       <ExpertiseSection />
       <ProcessSection />
       <TestimonialsSection />
+      <CtaFooterSection />
     </main>
   );
 }
+
 
 
 

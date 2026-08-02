@@ -530,10 +530,10 @@ export default function ExpertiseSection() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax offsets
-  const yHeader = useTransform(scrollYProgress, [0, 1], [40, -80]);
-  const yGrid = useTransform(scrollYProgress, [0, 1], [20, -40]);
-  const yBgDots = useTransform(scrollYProgress, [0, 1], ["-12rem", "12rem"]);
+  // Parallax offsets — larger ranges so motion is clearly visible
+  const yHeader = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const yGrid = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const yBgDots = useTransform(scrollYProgress, [0, 1], ["-16rem", "16rem"]);
 
   const toggleSelectCard = (id: string) => {
     if (selectedCard === id) {
@@ -546,21 +546,24 @@ export default function ExpertiseSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-white pt-20 md:pt-28 pb-28 md:pb-36 relative overflow-hidden border-t border-black/10 selection:bg-black selection:text-white"
+      className="bg-white pt-20 md:pt-28 pb-28 md:pb-36 relative border-t border-black/10 selection:bg-black selection:text-white"
     >
-      {/* Interactive Mouse Tracking Canvas */}
-      <InteractiveCanvas sectionRef={sectionRef} />
+      {/* Scoped overflow clip for bg layers only */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Interactive Mouse Tracking Canvas */}
+        <InteractiveCanvas sectionRef={sectionRef} />
 
-      {/* Parallax Dot Grid */}
-      <motion.div
-        style={{
-          y: yBgDots,
-          backgroundImage:
-            "radial-gradient(#000 0.0625rem, transparent 0.0625rem)",
-          backgroundSize: "1rem 1rem",
-        }}
-        className="absolute inset-0 pointer-events-none opacity-[0.075]"
-      />
+        {/* Parallax Dot Grid */}
+        <motion.div
+          style={{
+            y: yBgDots,
+            backgroundImage:
+              "radial-gradient(#000 0.0625rem, transparent 0.0625rem)",
+            backgroundSize: "1rem 1rem",
+          }}
+          className="absolute inset-0 pointer-events-none opacity-[0.075]"
+        />
+      </div>
 
       <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         {/* ── Section Header ── */}
