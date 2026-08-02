@@ -29,6 +29,7 @@ const testimonials = [
     role: "Marketing Director",
     company: "Nova Studios",
     avatar: "/images/client1.jpg",
+    projectImage: "/images/gabe-hobbs-Py3wHdjMaAI-unsplash.jpg",
     rating: 5,
     category: "Brand Campaign",
     year: "2026",
@@ -41,6 +42,7 @@ const testimonials = [
     role: "Executive Producer",
     company: "Sony Music",
     avatar: "/images/client2.jpg",
+    projectImage: "/images/conor-luddy-IVaKksEZmZA-unsplash.jpg",
     rating: 5,
     category: "Music Production",
     year: "2025",
@@ -53,6 +55,7 @@ const testimonials = [
     role: "Creative Director",
     company: "Vogue Editorial",
     avatar: "/images/client3.jpg",
+    projectImage: "/images/alex-kalligas--nIpaV-VC1U-unsplash.jpg",
     rating: 5,
     category: "Editorial Photography",
     year: "2025",
@@ -65,6 +68,7 @@ const testimonials = [
     role: "Global Brand Lead",
     company: "Apex Technology",
     avatar: "/images/client4.jpg",
+    projectImage: "/images/videography1.png",
     rating: 5,
     category: "Commercial Film",
     year: "2026",
@@ -449,10 +453,30 @@ export default function TestimonialsSection() {
                 </div>
               </div>
 
-              {/* Quote Text */}
-              <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-[1.2] text-black tracking-tight font-serif italic mb-12 max-w-5xl">
-                &ldquo;{current.quote}&rdquo;
-              </blockquote>
+              {/* Grid layout with project showcase image */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-8">
+                <div className="lg:col-span-8">
+                  {/* Quote Text */}
+                  <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-light leading-[1.2] text-black tracking-tight font-serif italic max-w-4xl">
+                    &ldquo;{current.quote}&rdquo;
+                  </blockquote>
+                </div>
+
+                {/* Project Delivered Visual Card */}
+                <div className="lg:col-span-4 relative h-48 sm:h-56 w-full rounded-none overflow-hidden border border-black/10 bg-black/5 shadow-md">
+                  <Image
+                    src={current.projectImage}
+                    alt={`${current.company} project showcase`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-3 text-white text-[0.6875rem] font-medium tracking-wider uppercase bg-black/70 px-2.5 py-1 backdrop-blur-sm">
+                    {current.company} Deliverable
+                  </div>
+                </div>
+              </div>
 
               {/* Author Info */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-8 border-t border-black/10">

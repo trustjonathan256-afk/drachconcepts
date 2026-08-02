@@ -292,6 +292,18 @@ export default function CtaFooterSection() {
     >
       {/* Scoped overflow clip for bg layers only */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Cinematic Atmospheric Background Image */}
+        <div className="absolute inset-0 opacity-15">
+          <Image
+            src="/images/bailey-mahon-2b6K4uy0Hbc-unsplash.jpg"
+            alt="Cinematic production background"
+            fill
+            sizes="100vw"
+            className="object-cover object-center filter grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </div>
+
         {/* Interactive Mouse Tracking Canvas Background */}
         <InteractiveCanvas sectionRef={sectionRef} />
 

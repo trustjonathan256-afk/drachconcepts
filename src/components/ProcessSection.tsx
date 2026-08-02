@@ -20,6 +20,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 
 // ─── Process Steps Data ───────────────────────────────────────────────────────
 const processSteps = [
@@ -28,6 +29,7 @@ const processSteps = [
     title: "Discovery & Strategy",
     subtitle: "Deep Dive & Narrative Architecture",
     icon: Compass,
+    image: "/images/nathan-dumlao-McztPB7Uqx8-unsplash.jpg",
     description:
       "We begin by immersing ourselves in your brand's DNA. We define core objectives, audience psychology, moodboards, and narrative arcs to ensure strategic alignment before a single frame is shot.",
     deliverables: ["Creative Brief", "Moodboards", "Storyboard & Script", "Concept Pitch"],
@@ -43,6 +45,7 @@ const processSteps = [
     title: "Pre-Production & Craft",
     subtitle: "Precision Planning & Technical Rigging",
     icon: Layers,
+    image: "/images/hero-camera2.jpg",
     description:
       "Flawless execution requires rigorous preparation. We manage talent casting, location scouting, set design, lighting schemes, and shot-by-shot technical pre-visualization.",
     deliverables: ["Technical Shot List", "Casting & Location Permits", "Lighting Plots", "Schedule & Call Sheets"],
@@ -58,6 +61,7 @@ const processSteps = [
     title: "Principal Production",
     subtitle: "High-Impact Execution & On-Set Direction",
     icon: Clapperboard,
+    image: "/images/event-coverage1.png",
     description:
       "Where vision comes to life. Our directors and cinematographers execute with RED/ARRI 8K/4K cinema cameras, master lighting rigs, FPV aerial coverage, and pristine audio capture.",
     deliverables: ["4K/8K RAW Dailies", "Multi-Track Audio", "FPV Aerial Captures", "B-Roll Archive"],
@@ -73,6 +77,7 @@ const processSteps = [
     title: "Post-Production & Mastering",
     subtitle: "Editing, Color Grading & Audio Architecture",
     icon: Sliders,
+    image: "/images/michael-soledad-jiOByhCw2jE-unsplash.jpg",
     description:
       "We sculpt raw assets into a polished masterpiece. Precision editing, DaVinci Resolve color grading, custom sound design, original music scoring, and multi-platform aspect ratio mastering.",
     deliverables: ["Master Cut (4K/8K)", "DaVinci Color Grade", "Dolby Atmos Audio", "Social Aspect Ratio Cuts"],
@@ -434,6 +439,21 @@ function ProcessStepCard({
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden border-t border-black pt-6 bg-black/[0.02] -mx-8 md:-mx-10 -mb-8 md:-mb-10 p-8 md:p-10"
           >
+            {/* Responsive Process Step Visual Image */}
+            <div className="relative w-full h-48 sm:h-64 mb-6 overflow-hidden border border-black/10 bg-black/5">
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 80vw"
+                className="object-cover transition-transform duration-700 ease-out hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1 text-white text-xs font-semibold uppercase tracking-widest">
+                Phase {item.step} Visual Blueprint
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <span className="text-[0.625rem] font-bold tracking-widest uppercase text-black/50 block mb-1">

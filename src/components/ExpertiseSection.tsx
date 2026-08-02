@@ -22,6 +22,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 
 // ─── Expertise Services Data ──────────────────────────────────────────────────
 const expertiseItems = [
@@ -29,6 +30,7 @@ const expertiseItems = [
     id: "01",
     title: "Video & Cinematography",
     icon: Video,
+    image: "/images/hero-camera1.jpg",
     shortDesc: "High-impact 4K cinematic film, commercials, and aerial production.",
     description:
       "From high-concept music videos to national brand commercials, we handle full-cycle visual production with RED/ARRI cinema cameras and FPV drone operations.",
@@ -48,6 +50,7 @@ const expertiseItems = [
     id: "02",
     title: "Editorial & Campaign Photography",
     icon: Camera,
+    image: "/images/alex-kalligas--nIpaV-VC1U-unsplash.jpg",
     shortDesc: "Commercial, lookbook, and high-fashion portraiture.",
     description:
       "Crafting iconic imagery for global publications and brands. We design bespoke lighting setups, art direction, and high-end retouching for maximum impact.",
@@ -67,6 +70,7 @@ const expertiseItems = [
     id: "03",
     title: "Music & Audio Architecture",
     icon: Music,
+    image: "/images/music-studio1.png",
     shortDesc: "World-class recording, mixing, mastering, and scoring.",
     description:
       "Equipped with premier acoustic recording spaces and analog outboard gear. We engineer original film scores, record artists, and deliver release-ready audio.",
@@ -86,6 +90,7 @@ const expertiseItems = [
     id: "04",
     title: "Brand Identity & Digital Media",
     icon: Sparkles,
+    image: "/images/fotis-fotopoulos-6L4ALETAORU-unsplash.jpg",
     shortDesc: "Strategic positioning, visual identity, and campaign collateral.",
     description:
       "Defining how visionary brands communicate visually and sonically across platforms. We build unified design systems and high-converting digital assets.",
@@ -411,6 +416,18 @@ function ExpertiseCard({
           >
             <ArrowUpRight className="w-4 h-4" />
           </motion.div>
+        </div>
+
+        {/* Image Feature Preview */}
+        <div className="relative w-full h-44 sm:h-52 mb-6 overflow-hidden bg-black/5 border border-black/10">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
         </div>
 
         {/* Title */}
