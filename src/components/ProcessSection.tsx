@@ -20,6 +20,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 // ─── Process Steps Data ───────────────────────────────────────────────────────
@@ -487,14 +488,16 @@ function ProcessStepCard({
               <span className="text-xs font-medium text-black/50">
                 Ready to initiate this phase for your brand?
               </span>
-              <motion.button
-                whileHover={{ scale: 1.04, backgroundColor: "#000000" }}
-                whileTap={{ scale: 0.96 }}
-                className="bg-black text-white px-5 py-2 text-xs font-medium tracking-wider uppercase flex items-center gap-2 shadow-md"
-              >
-                Initiate {item.title.split(" ")[0]}
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </motion.button>
+              <Link href={`/booking?phase=${encodeURIComponent(item.title)}`}>
+                <motion.button
+                  whileHover={{ scale: 1.04, backgroundColor: "#000000" }}
+                  whileTap={{ scale: 0.96 }}
+                  className="bg-black text-white px-5 py-2 text-xs font-medium tracking-wider uppercase flex items-center gap-2 shadow-md cursor-pointer"
+                >
+                  Initiate {item.title.split(" ")[0]}
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         )}

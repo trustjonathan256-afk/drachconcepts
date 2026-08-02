@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -28,18 +29,18 @@ const servicesList = [
 ];
 
 const quickLinks = [
-  { label: "Home", href: "#" },
-  { label: "Services", href: "#" },
-  { label: "Portfolio", href: "#" },
-  { label: "Process", href: "#" },
-  { label: "About Us", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Process", href: "/process" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "#", icon: FaInstagram },
-  { label: "YouTube", href: "#", icon: FaYoutube },
-  { label: "LinkedIn", href: "#", icon: FaLinkedin },
+  { label: "Instagram", href: "https://instagram.com", icon: FaInstagram },
+  { label: "YouTube", href: "https://youtube.com", icon: FaYoutube },
+  { label: "LinkedIn", href: "https://linkedin.com", icon: FaLinkedin },
 ];
 
 // ─── Variants ───────────────────────────────────────────────────────────────
@@ -321,14 +322,14 @@ export default function CtaFooterSection() {
 
       {/* ── TOP HERO CTA BLOCK ── */}
       <div className="pt-24 md:pt-36 pb-20 md:pb-28 border-b border-white/10 relative z-10">
-        <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-16 text-center">
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-16 text-left">
           <motion.div style={{ y: yHeader }}>
             {/* Eyebrow / Badges */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-8"
+              className="flex flex-wrap items-center justify-start gap-3 md:gap-4 mb-8"
             >
               <div className="flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-1.5 backdrop-blur-md">
                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -350,7 +351,7 @@ export default function CtaFooterSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[2.75rem] sm:text-[4.25rem] md:text-[5.5rem] lg:text-[6.75rem] font-light tracking-[-0.04em] text-white leading-[1.04] mb-8 max-w-6xl mx-auto"
+              className="text-[2.75rem] sm:text-[4.25rem] md:text-[5.5rem] lg:text-[6.75rem] font-light tracking-[-0.04em] text-white leading-[1.04] mb-8 max-w-6xl"
             >
               READY TO CREATE SOMETHING <br />
               <span className="font-serif italic font-normal text-white/40">
@@ -364,7 +365,7 @@ export default function CtaFooterSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/70 text-base md:text-xl lg:text-2xl font-light tracking-tight max-w-2xl mx-auto mb-12 leading-relaxed"
+              className="text-white/70 text-base md:text-xl lg:text-2xl font-light tracking-tight max-w-2xl mb-12 leading-relaxed"
             >
               Every great brand deserves visuals that people remember.
             </motion.p>
@@ -375,31 +376,34 @@ export default function CtaFooterSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="flex justify-center mb-16"
+              className="flex justify-start mb-16"
             >
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.96 }}
-                className="group relative bg-white text-black px-10 md:px-14 py-5 md:py-6 text-base md:text-lg font-medium flex items-center gap-3 shadow-[0_20px_50px_rgba(255,255,255,0.15)] hover:shadow-[0_30px_70px_rgba(255,255,255,0.25)] transition-all duration-300 select-none cursor-pointer"
-              >
-                <span>Book Your Project</span>
-                <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </div>
-              </motion.button>
+              <Link href="/booking">
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="group relative bg-white text-black px-10 md:px-14 py-5 md:py-6 text-base md:text-lg font-medium flex items-center gap-3 shadow-[0_20px_50px_rgba(255,255,255,0.15)] hover:shadow-[0_30px_70px_rgba(255,255,255,0.25)] transition-all duration-300 select-none cursor-pointer"
+                >
+                  <span>Book Your Project</span>
+                  <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </motion.button>
+              </Link>
             </motion.div>
 
             {/* Services Chips Summary */}
-            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 max-w-4xl mx-auto border-t border-white/10 pt-10">
+            <div className="flex flex-wrap items-center justify-start gap-3 md:gap-4 max-w-4xl border-t border-white/10 pt-10">
               {servicesList.map((service) => (
-                <motion.div
-                  key={service}
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-                  className="flex items-center gap-2 border border-white/20 bg-white/5 px-4 md:px-5 py-2 text-xs md:text-sm font-medium tracking-wider text-white/80 backdrop-blur-sm cursor-pointer transition-colors"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-white/60" />
-                  <span>{service}</span>
-                </motion.div>
+                <Link key={service} href="/services">
+                  <motion.div
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                    className="flex items-center gap-2 border border-white/20 bg-white/5 px-4 md:px-5 py-2 text-xs md:text-sm font-medium tracking-wider text-white/80 backdrop-blur-sm cursor-pointer transition-colors"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-white/60" />
+                    <span>{service}</span>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </motion.div>
@@ -413,7 +417,7 @@ export default function CtaFooterSection() {
             {/* Column 1: Brand & Mission */}
             <div className="lg:col-span-4 flex flex-col justify-between">
               <div>
-                <a href="#" className="inline-block mb-6">
+                <Link href="/" className="inline-block mb-6">
                   <Image
                     src="/images/drash_logo.png"
                     alt="Drach Concepts Logo"
@@ -421,7 +425,7 @@ export default function CtaFooterSection() {
                     height={62}
                     className="h-10 w-auto object-contain invert"
                   />
-                </a>
+                </Link>
                 <p className="text-white/60 text-sm leading-relaxed max-w-sm mb-6 font-normal">
                   Pioneering cinematic videography, editorial photography, and sound architecture. Built for visionary brands worldwide.
                 </p>
@@ -434,6 +438,8 @@ export default function CtaFooterSection() {
                     <motion.a
                       key={s.label}
                       href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, backgroundColor: "#ffffff", color: "#000000" }}
                       whileTap={{ scale: 0.95 }}
                       className="w-10 h-10 border border-white/20 flex items-center justify-center text-white transition-colors"
@@ -454,13 +460,13 @@ export default function CtaFooterSection() {
               <ul className="space-y-3 text-sm font-medium text-white/70">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
-                    <a
+                    <Link
                       href={link.href}
                       className="hover:text-white transition-colors duration-200 flex items-center gap-1.5 group"
                     >
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

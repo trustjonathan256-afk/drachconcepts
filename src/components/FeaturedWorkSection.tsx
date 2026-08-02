@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, ArrowRight, Play } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
@@ -428,8 +429,8 @@ function FeaturedCard({ project }: { project: (typeof projects)[0] }) {
           </div>
         </div>
 
-        <a
-          href="#"
+        <Link
+          href="/portfolio"
           className="group/cta flex items-center gap-3 text-white font-medium text-sm tracking-wide shrink-0 hover:gap-4 transition-all duration-300"
         >
           <span className="border-b border-white/40 group-hover/cta:border-white pb-0.5 transition-colors duration-300">
@@ -438,7 +439,7 @@ function FeaturedCard({ project }: { project: (typeof projects)[0] }) {
           <div className="w-8 h-8 border border-white/40 flex items-center justify-center group-hover/cta:bg-white group-hover/cta:border-white transition-all duration-300">
             <ArrowUpRight className="w-4 h-4 group-hover/cta:text-black transition-colors duration-300" />
           </div>
-        </a>
+        </Link>
       </div>
     </motion.article>
   );
@@ -671,8 +672,8 @@ export default function FeaturedWorkSection() {
             </span>
           </div>
 
-          <a
-            href="#"
+          <Link
+            href="/portfolio"
             className="group flex items-center gap-3 text-black font-semibold text-sm tracking-wide hover:gap-4 transition-all duration-300"
           >
             <span className="border-b border-black/30 group-hover:border-black pb-0.5 transition-colors duration-300">
@@ -681,7 +682,7 @@ export default function FeaturedWorkSection() {
             <div className="w-8 h-8 border border-black/20 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all duration-300">
               <ArrowRight className="w-4 h-4 group-hover:text-white transition-colors duration-300" />
             </div>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

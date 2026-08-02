@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // ─── Expertise Services Data ──────────────────────────────────────────────────
 const expertiseItems = [
@@ -513,22 +514,26 @@ function ExpertiseCard({
 
               {/* Action Buttons */}
               <div className="flex items-center gap-4 pt-4 border-t border-black/10">
-                <motion.button
-                  whileHover={{ scale: 1.04, backgroundColor: "#000000" }}
-                  whileTap={{ scale: 0.96 }}
-                  className="bg-black text-white px-5 py-2.5 text-xs font-medium tracking-wider uppercase flex items-center gap-2 shadow-md"
-                >
-                  Book {item.title.split(" ")[0]}
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ x: 3 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="text-xs font-medium tracking-wider uppercase text-black flex items-center gap-1.5 hover:text-black/60 transition-colors"
-                >
-                  View Case Studies
-                  <ExternalLink className="w-3.5 h-3.5 text-black/50" />
-                </motion.button>
+                <Link href={`/booking?service=${encodeURIComponent(item.title)}`}>
+                  <motion.button
+                    whileHover={{ scale: 1.04, backgroundColor: "#000000" }}
+                    whileTap={{ scale: 0.96 }}
+                    className="bg-black text-white px-5 py-2.5 text-xs font-medium tracking-wider uppercase flex items-center gap-2 shadow-md cursor-pointer"
+                  >
+                    Book {item.title.split(" ")[0]}
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </motion.button>
+                </Link>
+                <Link href="/portfolio">
+                  <motion.button
+                    whileHover={{ x: 3 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="text-xs font-medium tracking-wider uppercase text-black flex items-center gap-1.5 hover:text-black/60 transition-colors cursor-pointer"
+                  >
+                    View Case Studies
+                    <ExternalLink className="w-3.5 h-3.5 text-black/50" />
+                  </motion.button>
+                </Link>
               </div>
             </div>
           </motion.div>

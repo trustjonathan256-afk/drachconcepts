@@ -8,6 +8,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowUpRight,
   Compass,
@@ -990,15 +991,17 @@ export default function AboutSection() {
               </div>
 
               <div className="flex items-center gap-6">
-                <motion.button
-                  whileHover={{ scale: 1.03, backgroundColor: "#f0f0f0" }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ duration: 0.2 }}
-                  className="bg-white text-black px-8 py-4 text-[0.9375rem] font-medium flex items-center gap-2 group"
-                >
-                  Explore Our Work
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </motion.button>
+                <Link href="/portfolio">
+                  <motion.button
+                    whileHover={{ scale: 1.03, backgroundColor: "#f0f0f0" }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-white text-black px-8 py-4 text-[0.9375rem] font-medium flex items-center gap-2 group cursor-pointer"
+                  >
+                    Explore Our Work
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </motion.button>
+                </Link>
               </div>
             </div>
           </div>

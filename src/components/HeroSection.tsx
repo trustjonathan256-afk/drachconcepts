@@ -17,8 +17,10 @@ import {
   Menu,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useRef, useCallback } from "react";
 import NetBackground from "./NetBackground";
+import Navbar from "./Navbar";
 
 // Reusable animated container for the layout
 const containerVariants: Variants = {
@@ -198,88 +200,7 @@ export default function HeroSection() {
 
   return (
     <div className="font-sans text-black selection:bg-black selection:text-white relative">
-      {/* --- ANIMATED SCROLLING STICKY / FIXED NAVIGATION BAR --- */}
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
-          ? "bg-white/95 backdrop-blur-lg border-b border-black/15 shadow-[0_10px_30px_rgba(0,0,0,0.08)] py-3"
-          : "bg-white/70 backdrop-blur-sm border-b border-black/5 py-5"
-          }`}
-      >
-        <div className="flex items-center justify-between px-6 md:px-12 lg:px-16 max-w-[100rem] mx-auto">
-          {/* Logo with smooth dynamic scaling */}
-          <a
-            href="#"
-            className="flex items-center cursor-pointer group select-none"
-          >
-            <motion.div
-              animate={{ scale: isScrolled ? 0.9 : 1 }}
-              transition={{ duration: 0.3 }}
-              className="relative h-[2.78rem] md:h-[3.71rem] lg:h-[4.33rem] w-auto group-hover:scale-105 transition-transform duration-300"
-            >
-              <Image
-                src="/images/drash_logo.png"
-                alt="Drach Concepts Logo"
-                width={216}
-                height={67}
-                className="h-full w-auto object-contain"
-                priority
-              />
-            </motion.div>
-          </a>
-
-          {/* Center Links */}
-          <nav className="hidden lg:flex items-center gap-10 text-[0.9375rem] font-medium text-black/80">
-            <a
-              href="#"
-              className="relative cursor-pointer hover:text-black transition-colors duration-200 after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[0.09375rem] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="relative cursor-pointer flex items-center gap-1 hover:text-black transition-colors duration-200 after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[0.09375rem] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Services <ChevronDown className="w-4 h-4 text-black/40" />
-            </a>
-            <a
-              href="#"
-              className="relative cursor-pointer flex items-center gap-1 hover:text-black transition-colors duration-200 after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[0.09375rem] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Portfolio <ChevronDown className="w-4 h-4 text-black/40" />
-            </a>
-            <a
-              href="#"
-              className="relative cursor-pointer flex items-center gap-1 hover:text-black transition-colors duration-200 after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[0.09375rem] after:bg-black after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Pages <ChevronDown className="w-4 h-4 text-black/40" />
-            </a>
-          </nav>
-
-          {/* Right Actions */}
-          <div className="hidden md:flex items-center gap-6">
-            <motion.button
-              animate={{ scale: isScrolled ? 0.95 : 1 }}
-              transition={{ duration: 0.3 }}
-              whileHover={{ scale: isScrolled ? 0.97 : 1.04, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              className="cursor-pointer bg-black text-white px-6 py-2.5 md:py-3 text-[0.9375rem] font-medium flex items-center gap-2 hover:bg-black/80 transition-colors shadow-md hover:shadow-xl"
-            >
-              Book Project{" "}
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.06)" }}
-              whileTap={{ scale: 0.95 }}
-              className="cursor-pointer w-10 h-10 md:w-12 md:h-12 rounded-full border border-black/20 flex items-center justify-center transition-colors text-black"
-            >
-              <Menu className="w-5 h-5" />
-            </motion.button>
-          </div>
-        </div>
-      </motion.header>
+      <Navbar />
 
       {/* 
         Top Hero Section with Pure White Background 
@@ -383,25 +304,29 @@ export default function HeroSection() {
             >
               {/* Tabs */}
               <div className="flex items-center gap-8 mb-5 px-2">
-                <motion.button
-                  whileHover={{ scale: 1.04, y: -1 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="cursor-pointer bg-black text-white text-sm font-bold tracking-[0.2em] px-9 py-4 hover:bg-black/85 transition-colors shadow-lg hover:shadow-2xl"
-                >
-                  SERVICES
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="cursor-pointer text-black/40 text-sm font-bold tracking-[0.2em] hover:text-black transition-colors duration-200"
-                >
-                  PORTFOLIO
-                </motion.button>
+                <Link href="/services">
+                  <motion.button
+                    whileHover={{ scale: 1.04, y: -1 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="cursor-pointer bg-black text-white text-sm font-bold tracking-[0.2em] px-9 py-4 hover:bg-black/85 transition-colors shadow-lg hover:shadow-2xl"
+                  >
+                    SERVICES
+                  </motion.button>
+                </Link>
+                <Link href="/portfolio">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="cursor-pointer text-black/40 text-sm font-bold tracking-[0.2em] hover:text-black transition-colors duration-200"
+                  >
+                    PORTFOLIO
+                  </motion.button>
+                </Link>
               </div>
 
               {/* Main White Box */}
               <div className="bg-white border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.08)] w-full flex flex-col md:flex-row relative">
-                <div className="group flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors duration-200">
+                <Link href="/booking" className="group flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-black/10 cursor-pointer hover:bg-black/[0.02] transition-colors duration-200">
                   <p className="text-[0.6875rem] text-black/50 mb-2">
                     I&apos;m looking to...
                   </p>
@@ -411,9 +336,9 @@ export default function HeroSection() {
                     </span>
                     <ChevronDown className="w-4 h-4 text-black/40 group-hover:translate-y-0.5 transition-transform duration-200" />
                   </div>
-                </div>
+                </Link>
 
-                <div className="group flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-black/10 relative cursor-pointer hover:bg-black/[0.02] transition-colors duration-200">
+                <Link href="/booking" className="group flex-1 p-6 md:p-8 border-b md:border-b-0 md:border-r border-black/10 relative cursor-pointer hover:bg-black/[0.02] transition-colors duration-200">
                   <p className="text-[0.6875rem] text-black/50 mb-2">
                     Location
                   </p>
@@ -423,9 +348,9 @@ export default function HeroSection() {
                     </span>
                     <MapPin className="w-4 h-4 text-black/40 group-hover:scale-110 transition-transform duration-200" />
                   </div>
-                </div>
+                </Link>
 
-                <div className="group flex-1 p-6 md:p-8 md:pr-32 relative cursor-pointer hover:bg-black/[0.02] transition-colors duration-200">
+                <Link href="/booking" className="group flex-1 p-6 md:p-8 md:pr-32 relative cursor-pointer hover:bg-black/[0.02] transition-colors duration-200">
                   <p className="text-[0.6875rem] text-black/50 mb-2">
                     Project Range
                   </p>
@@ -435,16 +360,19 @@ export default function HeroSection() {
                     </span>
                     <ChevronDown className="w-4 h-4 text-black/40 group-hover:translate-y-0.5 transition-transform duration-200" />
                   </div>
-                </div>
+                </Link>
 
                 {/* Overlapping Search Button */}
-                <motion.button
-                  whileHover={{ scale: 1.06, backgroundColor: "#1a1a1a" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="cursor-pointer absolute right-0 bottom-0 md:-right-8 md:-bottom-8 w-24 h-24 bg-black flex items-center justify-center shadow-2xl z-30 transition-shadow hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
-                >
-                  <Search className="w-6 h-6 text-white" strokeWidth={1.5} />
-                </motion.button>
+                <Link href="/booking">
+                  <motion.button
+                    whileHover={{ scale: 1.06, backgroundColor: "#1a1a1a" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="cursor-pointer absolute right-0 bottom-0 md:-right-8 md:-bottom-8 w-24 h-24 bg-black flex items-center justify-center shadow-2xl z-30 transition-shadow hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                    aria-label="Search and Book Studio"
+                  >
+                    <Search className="w-6 h-6 text-white" strokeWidth={1.5} />
+                  </motion.button>
+                </Link>
               </div>
             </motion.div>
           </motion.div>
@@ -535,21 +463,25 @@ export default function HeroSection() {
             </p>
 
             <div className="flex items-center gap-8">
-              <motion.button
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="cursor-pointer bg-black text-white px-8 py-4 text-[0.9375rem] font-medium hover:bg-black/85 transition-colors shadow-md hover:shadow-xl"
-              >
-                More Details
-              </motion.button>
-              <motion.button
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.97 }}
-                className="cursor-pointer group text-[0.9375rem] font-medium text-black flex items-center gap-2 hover:text-black/60 transition-colors"
-              >
-                Request a Callback{" "}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </motion.button>
+              <Link href="/about">
+                <motion.button
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="cursor-pointer bg-black text-white px-8 py-4 text-[0.9375rem] font-medium hover:bg-black/85 transition-colors shadow-md hover:shadow-xl"
+                >
+                  More Details
+                </motion.button>
+              </Link>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ x: 4 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="cursor-pointer group text-[0.9375rem] font-medium text-black flex items-center gap-2 hover:text-black/60 transition-colors"
+                >
+                  Request a Callback{" "}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         </div>
