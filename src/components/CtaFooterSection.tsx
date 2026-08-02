@@ -18,6 +18,7 @@ import {
 import { FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -276,6 +277,14 @@ function InteractiveCanvas({
 // ─── Main Export Component ───────────────────────────────────────────────────
 export default function CtaFooterSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -417,13 +426,17 @@ export default function CtaFooterSection() {
             {/* Column 1: Brand & Mission */}
             <div className="lg:col-span-4 flex flex-col justify-between">
               <div>
-                <Link href="/" className="inline-block mb-6">
+                <Link
+                  href="/"
+                  onClick={handleLogoClick}
+                  className="inline-block mb-6 cursor-pointer group"
+                >
                   <Image
                     src="/images/drash_logo.png"
                     alt="Drach Concepts Logo"
                     width={200}
                     height={62}
-                    className="h-10 w-auto object-contain invert"
+                    className="h-10 w-auto object-contain invert group-hover:scale-105 transition-transform duration-300"
                   />
                 </Link>
                 <p className="text-white/60 text-sm leading-relaxed max-w-sm mb-6 font-normal">
@@ -462,6 +475,12 @@ export default function CtaFooterSection() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      onClick={(e) => {
+                        if (link.href === "/" && pathname === "/") {
+                          e.preventDefault();
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                      }}
                       className="hover:text-white transition-colors duration-200 flex items-center gap-1.5 group"
                     >
                       <ChevronRight className="w-3 h-3 text-white/30 group-hover:translate-x-0.5 group-hover:text-white transition-all" />

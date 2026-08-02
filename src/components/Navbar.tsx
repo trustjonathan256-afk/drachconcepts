@@ -45,6 +45,13 @@ export default function Navbar() {
     { label: "Contact", href: "/contact" },
   ];
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <motion.header
@@ -61,6 +68,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
+            onClick={handleLogoClick}
             className="flex items-center cursor-pointer group select-none"
           >
             <motion.div
@@ -87,6 +95,12 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
+                  onClick={(e) => {
+                    if (link.href === "/" && pathname === "/") {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
                   className={`relative cursor-pointer hover:text-black transition-colors duration-200 after:absolute after:-bottom-0.5 after:left-0 after:h-[0.09375rem] after:bg-black after:transition-all after:duration-300 ${
                     isActive ? "text-black after:w-full font-semibold" : "after:w-0 hover:after:w-full"
                   }`}
@@ -186,13 +200,19 @@ export default function Navbar() {
               <div>
                 {/* Mobile Drawer Header */}
                 <div className="flex items-center justify-between pb-8 mb-8 border-b border-black/10">
-                  <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link
+                    href="/"
+                    onClick={(e) => {
+                      setIsMobileMenuOpen(false);
+                      handleLogoClick(e);
+                    }}
+                  >
                     <Image
                       src="/images/drash_logo.png"
                       alt="Drach Concepts Logo"
                       width={160}
                       height={50}
-                      className="h-8 w-auto object-contain"
+                      className="h-8 w-auto object-contain cursor-pointer"
                     />
                   </Link>
                 </div>
@@ -205,7 +225,13 @@ export default function Navbar() {
                       <Link
                         key={link.label}
                         href={link.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          setIsMobileMenuOpen(false);
+                          if (link.href === "/" && pathname === "/") {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }
+                        }}
                         className={`text-xl font-medium transition-colors flex items-center justify-between ${
                           isActive ? "text-black font-semibold" : "text-black/70 hover:text-black"
                         }`}

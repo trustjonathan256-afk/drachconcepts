@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import CtaFooterSection from "@/components/CtaFooterSection";
 import { motion } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, Sparkles, DollarSign, Calendar } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Sparkles, Calendar, Banknote } from "lucide-react";
 import Image from "next/image";
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -19,7 +19,7 @@ function BookingForm() {
     email: "",
     phone: "",
     service: initialService,
-    budget: "$5,000 - $10,000",
+    budget: "UGX 1M - 2M",
     location: "Studio Production",
     timeline: "Within 1 Month",
     notes: initialPhase ? `Interested in starting phase: ${initialPhase}` : "",
@@ -44,11 +44,12 @@ function BookingForm() {
   ];
 
   const budgetOptions = [
-    "< $1,000",
-    "$1,000 - $5,000",
-    "$5,000 - $10,000",
-    "$10,000 - $25,000",
-    "$25,000+",
+    "< UGX 500K",
+    "UGX 500K - 1M",
+    "UGX 1M - 2M",
+    "UGX 2M - 5M",
+    "UGX 5M - 10M",
+    "UGX 10M+",
   ];
 
   return (
@@ -116,9 +117,9 @@ function BookingForm() {
             {/* Budget Options */}
             <div className="mb-12">
               <label className="block text-xs font-bold uppercase tracking-wider text-black/70 mb-4 flex items-center gap-2">
-                <DollarSign className="w-4 h-4 text-black" /> Estimated Budget Range
+                <Banknote className="w-4 h-4 text-black" /> Estimated Budget Range (UGX)
               </label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 {budgetOptions.map((b) => (
                   <button
                     type="button"
