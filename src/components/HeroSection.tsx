@@ -6,6 +6,7 @@ import {
   useScroll,
   useTransform,
   useMotionValueEvent,
+  MotionValue,
 } from "framer-motion";
 import {
   ArrowUpRight,
@@ -38,7 +39,7 @@ const itemVariants: Variants = {
 };
 
 // ─── Hero Image with 3-D Tilt, Hover Glow & Click Ripple ────────────────────
-function HeroImage({ yHeroImage }: { yHeroImage: ReturnType<typeof useTransform> }) {
+function HeroImage({ yHeroImage }: { yHeroImage: MotionValue<number> }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Tilt state
@@ -203,8 +204,8 @@ export default function HeroSection() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
-            ? "bg-white/95 backdrop-blur-lg border-b border-black/15 shadow-[0_10px_30px_rgba(0,0,0,0.08)] py-3"
-            : "bg-white/70 backdrop-blur-sm border-b border-black/5 py-5"
+          ? "bg-white/95 backdrop-blur-lg border-b border-black/15 shadow-[0_10px_30px_rgba(0,0,0,0.08)] py-3"
+          : "bg-white/70 backdrop-blur-sm border-b border-black/5 py-5"
           }`}
       >
         <div className="flex items-center justify-between px-6 md:px-12 lg:px-16 max-w-[100rem] mx-auto">
